@@ -10,8 +10,9 @@
     // useful when saving the description in local storage?
     function save(event) {
         var key =$($(event.target).parents("div")).attr('id');
-        console.log(key);
-        localStorage.setItem(key, "");
+        var input =$($(event.target).parents("div")).children().eq(1);
+        var inputValue = $(input).val();
+        localStorage.setItem(key, inputValue);
     };
     var saveButton = $('.saveBtn');
     saveButton.on('click', save);
@@ -24,7 +25,7 @@
     var timeBlock = $(document.querySelectorAll(".time-block"));
     console.log(timeBlock);
 
-    function simpleTenses(x) {
+    function classChanger(x) {
         for(i=0; i<timeBlock.length; i++) {
             var currentTime = x;
             var hourString = timeBlock[i].id;
@@ -49,20 +50,20 @@
 
 
 
-    function currentHour () {
+    function simpleTense () {
         setInterval(function getTime() {
             var time = dayjs().format('HH');
-            simpleTenses(time);
+            classChanger(time);
         }, 1000)
     }; 
     
-    currentHour();
+    simpleTense();
 
 
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
-    //
+    function savedEvent() {}
     // TODO: Add code to display the current date in the header of the page.
     //Current Date
     function currentDate() {
