@@ -20,12 +20,44 @@
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
-    function currentHour () {
-        var hour = dayjs().format('HH');
-        console.log(hour);
-    } 
 
-    currentHour;
+    var timeBlock = $(document.querySelectorAll(".time-block"));
+    console.log(timeBlock);
+
+    function simpleTenses(x) {
+        for(i=0; i<timeBlock.length; i++) {
+            var currentTime = x;
+            var hourString = timeBlock[i].id;
+            var string = hourString.toString();
+            var hour = string.slice(5);
+            var hourNumber = JSON.parse(hour);
+            if( hourNumber < currentTime) {
+                $(timeBlock[i]).removeClass("present");
+                $(timeBlock[i]).removeClass("future");
+                $(timeBlock[i]).addClass("past");
+            } else if ( hourNumber == currentTime) {
+                $(timeBlock[i]).removeClass("past");
+                $(timeBlock[i]).removeClass("future");
+                $(timeBlock[i]).addClass("present");
+            } else if ( hourNumber > currentTime) {
+                $(timeBlock[i]).removeClass("past");
+                $(timeBlock[i]).removeClass("present");
+                $(timeBlock[i]).addClass("future");
+            };
+        };
+    };
+
+
+
+    function currentHour () {
+        setInterval(function getTime() {
+            var time = dayjs().format('HH');
+            simpleTenses(time);
+        }, 1000)
+    }; 
+    
+    currentHour();
+
 
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
@@ -33,11 +65,12 @@
     //
     // TODO: Add code to display the current date in the header of the page.
     //Current Date
-    function currentDate () {
+    function currentDate() {
         var date = $('#currentDay');
         var today = dayjs().format('dddd, MMM Do');
-        date.html(today);
-        console.log(date);
+        setInterval(function getDate () {
+            date.html(today);
+        }, 1000);
     };
     
     currentDate();
