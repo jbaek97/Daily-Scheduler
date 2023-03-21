@@ -1,7 +1,9 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-// $(function () {
+
+
+    $(function () {
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -23,7 +25,6 @@
     // current hour in 24-hour time?
 
     var timeBlock = $(document.querySelectorAll(".time-block"));
-    console.log(timeBlock);
     
 
     function classChanger(x) {
@@ -76,7 +77,7 @@
     //Current Date
     function currentDate() {
         var date = $('#currentDay');
-        var today = dayjs().format('dddd, MMM Do');
+        var today = dayjs().format('dddd, MMMM D');
         setInterval(function getDate () {
             date.html(today);
         }, 1000);
@@ -84,5 +85,5 @@
     
     currentDate();
 
-//   });
+  });
   
